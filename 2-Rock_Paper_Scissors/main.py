@@ -33,8 +33,26 @@ def part_1(input):
 
 def part_2(input):
     result = 0
+    for turn in input:
+        opponent, outcome = turn
+        opponent = map[opponent]
+
+        match outcome:
+            case 'X': # lose
+                result += 0 + points[win[opponent]]
+            case 'Y': # draw
+                result += 3 + points[opponent]
+            case 'Z': # win
+                result += 6 + points[loss[opponent]]
+    
+    return result
 
 if __name__ == '__main__':
     file_path = './2-Rock_Paper_Scissors/input.txt'
     input = process_inputs(file_path)
+
+    print("--Part 1--")
     print(part_1(input))
+    
+    print("--Part 2--")
+    print(part_2(input))
