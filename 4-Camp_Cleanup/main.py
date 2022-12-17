@@ -3,6 +3,7 @@ def process_inputs(file_path):
         content = f.read().split('\n')
         return [supplies.split(',') for supplies in content]
 
+
 def part_1(input):
     common = 0
     for assign_1, assign_2 in input:
@@ -13,13 +14,14 @@ def part_1(input):
 
         if (x >= a and y <= b) or (x <= a and y >= b):
             common += 1
-        
+
     return common
+
 
 def part_2(input):
     overlap = 0
     for assign_1, assign_2 in input:
-        x, y  = assign_1.split('-')
+        x, y = assign_1.split('-')
         a, b = assign_2.split('-')
 
         set_1 = set(range(int(x), int(y) + 1))
@@ -27,8 +29,9 @@ def part_2(input):
 
         if set_1.intersection(set_2) or set_2.intersection(set_1):
             overlap += 1
-    
+
     return overlap
+
 
 if __name__ == '__main__':
     file_path = './4-Camp_Cleanup/input.txt'
@@ -36,6 +39,6 @@ if __name__ == '__main__':
 
     print("--Part 1--")
     print(part_1(input))
-    
+
     print("--Part 2--")
     print(part_2(input))
