@@ -24,8 +24,19 @@ def part_1(stacks: List[List[str]], instructions: Tuple[int, int, int]) -> str:
     answer = [stack[-1] for stack in stacks]
     return ''.join(answer)
 
-def part_2(input):
-    pass
+
+def part_2(stacks: List[List[str]], instructions: Tuple[int, int, int]) -> str:
+    for instruction in instructions:
+        move, from_stack, to_stack = parse_instruction(instruction)
+        from_stack -= 1
+        to_stack -= 1
+
+        move = 0 - move
+        stacks[to_stack].extend(stacks[from_stack][move:])
+        stacks[from_stack] = stacks[from_stack][:(len(stacks[from_stack]) + move)]
+
+    answer = [stack[-1] for stack in stacks]
+    return ''.join(answer)
 
 
 def create_stack(stacks_input: str) -> List[List[str]]:
@@ -52,4 +63,4 @@ if __name__ == '__main__':
     print(part_1(stacks, instructions.split('\n')))
 
     print("--Part 2--")
-    print(part_2(input))
+    print(part_2(stacks, instructions.split('\n')))
